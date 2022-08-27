@@ -1,0 +1,9 @@
+{% extends 'flatpages/default.html' %}
+
+{% block title %}Любопытное объявление{% endblock title %}
+{% block content %}
+{{post.dateCreation}}
+<h2>{{ad_detail.title}}</h2>
+<h3>{{ad_detail.text}}</h3>
+<button><a href="{% url 'responses'  %}"><u> Откликнуться </u></a></button>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'default.html' %}
+
+{% block title %}Злободневные вести{% endblock title %}
+
+{% block content %}
+
+<h3 style="text-align: center;">&nbsp;</h3>
+<h3>Здравствуй, {{user}}, посмотрим, что любопытного сегодня...</h3>
+<hr>
+   {% if board %}
+       <table>
+           <tr>
+               <td style="width: 211.55px; text-align: center;"><h5>Страждующий</h5></td>
+                <td style="width: 211.55px; text-align: center;"><h5>Суть прошения</h5></td>
+               <td style="width: 211.55px; text-align: center;"><h5>Разъяснение</h5></td>
+               <td style="width: 211.55px; text-align: center;"><h6>Мастера, обратите внимание...</h6></td>
+<!--               <td style="width: 200.55px; text-align: center;"><h3>Category type</h3></td>-->
+
+           </tr>
+
+           {% for n in board %}
+           <tr>
+
+               <td style="width: 211.55px; text-align: center;">{{ n.user }}</td>
+               <td style="width: 211.55px; text-align: center;">{{ n.title }}</td>
+               <td style="width: 211.55px; text-align: center;">{{ n.text }}</td>
+               <td style="width: 200.55px; text-align: center;">{{ n.category }}</td>
+<!--               <td style="width: 200.55px; text-align: center;"><button> Откликнуться </button></td>-->
+               <td style="width: 200.55px; text-align: center;"><a href="{% url 'ad_detail' n.id %}"><u>Детализировать</u></a></td>
+
+           </tr>
+           {% endfor %}
+
+       </table>
+<p></p>
+
+<!--<button><a href="{% url 'logout'  %}"><u>Уйти</u></a></button>-->
+<button><a href="{% url 'ad_create'  %}"><u>Создать повестку</u></a></button>
+{% endif %}
+
+   {% if page_obj.has_previous %}
+       <a href="?page=1">1</a>
+       {% if page_obj.previous_page_number != 1 %}
+           ...
+           <a href="?page={{ page_obj.previous_page_number }}">{{ page_obj.previous_page_number }}</a>
+       {% endif %}
+   {% endif %}
+
+   {{ page_obj.number }}
+
+   {% if page_obj.has_next %}
+       <a href="?page={{ page_obj.next_page_number }}">{{ page_obj.next_page_number }}</a>
+       {% if paginator.num_pages != page_obj.next_page_number %}
+           ...
+           <a href="?page={{ page_obj.paginator.num_pages }}">{{ page_obj.paginator.num_pages }}</a>
+       {% endif %}
+   {% endif %}
+
+{% endblock content %}

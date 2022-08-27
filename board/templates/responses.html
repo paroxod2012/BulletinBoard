@@ -1,0 +1,14 @@
+{% extends 'default.html' %}
+
+{% block title %} Мой отклик {% endblock title %}
+{% block content %}
+<p>&nbsp;</p>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Направить" />
+</form>
+
+
+{% endblock content %}
